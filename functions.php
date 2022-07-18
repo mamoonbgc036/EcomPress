@@ -26,3 +26,17 @@ add_action( 'wp_enqueue_scripts', 'xpent_style_and_scripts' );
 // GIVE CLIENT TO HAVE CUSTOM LOGO
 
 add_theme_support( 'custom-logo' );
+
+
+//LOGOUT TO HOME PAGE
+
+$user = wp_get_current_user();
+
+if( $user->roles[0] == 'customer' ) {
+	add_action( 'wp_logout', 'auto_redirect_after_logout' );
+}
+
+function auto_redirect_after_logout() {
+	wp_safe_redirect( home_url() );
+  	exit;
+}
