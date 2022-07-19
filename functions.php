@@ -1,4 +1,8 @@
 <?php 
+
+require get_theme_file_path( 'inc/product_search_route.php' );
+
+
 function xpent_style_and_scripts() {
 	wp_enqueue_style( 'font-awesome', get_theme_file_uri( '/css/font-awesome.min.css' ), array(), wp_get_theme()->get( 'Version' ) );
 	wp_enqueue_style( 'bootstrap-css', get_template_directory_uri() . '/css/bootstrap.css', array(), wp_get_theme()->get( 'Version' ) );
