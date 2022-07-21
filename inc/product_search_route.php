@@ -3,7 +3,7 @@
 	add_action( 'rest_api_init', 'EcomPress_Search_Route' );
 
 	function EcomPress_Search_Route() {
-		register_rest_route( 'EcomPress/v1', 'search', array(
+		register_rest_route( 'ecompress/v1', 'search', array(
 			'methods' => WP_REST_SERVER::READABLE,
 			'callback' => 'ecompress_search_products',
 		) );
@@ -30,5 +30,5 @@
 			array_push( $only_cat_names, $product->post_title );
 		}
 
-		return $only_cat_names;
+		return $cats;
 	}

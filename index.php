@@ -102,231 +102,64 @@
         <div class="featured-product">
           <div class="row mlr_-20">
 
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-                <div class="sale-label"><span>Sale</span></div>
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-1.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                <div class="item-title"> <a href="product-page.html">Denim Ladis Long Jacket</a> </div>
-                  <div class="price-box"> 
-                    <span class="price">$90.00</span>
-                    <del class="price old-price">$100.00</del>
-                    <div class="item-rating">
-                      <div title="70%" class="rating-result"> <span style="width:70%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php 
+              $args = array(
+                  'posts_per_page' => -1,
+                  'tax_query' => array(
+                      'relation' => 'AND',
+                      array(
+                          'taxonomy' => 'product_cat',
+                          'field' => 'slug',
+                          'terms' => 'feature_product'
+                      ),
+                  ),
+                  'post_type' => 'product',
+                  'orderby' => 'title',
+              );
+              $the_query = new WP_Query( $args );
 
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-2.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> <a href="product-page.html">Denim Ladis Red Cloth</a> </div>
-                  <div class="price-box"> 
-                    <span class="price">$120.00</span> 
-                    <div class="item-rating">
-                      <div title="66%" class="rating-result"> <span style="width:66%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              while ( $the_query->have_posts() ) {
+                  $the_query->the_post();
+                  $product = wc_get_product( get_the_ID() );
+                  if( $product->is_in_stock() ) {
+                  ?>
+                  <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
+                    <div class="product-item">
+                      <div class="sale-label"><span>Sale</span></div>
+                      <div class="product-image"> 
+                      <?php 
+                      $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->ID ), 'single-post-thumbnail' );
 
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-              <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-3.jpg'; ?>" alt=""> </a>
-                <div class="product-detail-inner">
-                  <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                  </div>
-                </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">Super Slim Women Cloth</a> 
-                  </div>
-                  <div class="price-box"> 
-                    <span class="price">$48.00</span> 
-                    <div class="item-rating">
-                        <div title="68%" class="rating-result"> <span style="width:68%"></span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-4.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">American Ladis Cloth</a> 
-                  </div>
-                  <div class="price-box"> 
-                    <span class="price">$40.00</span> 
-                    <div class="item-rating">
-                       <div title="58%" class="rating-result"> <span style="width:58%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-              <div class="sale-label"><span>Sale</span></div>
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-5.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">Slim Girls Jeans</a>
-                  </div>
-                  <div class="price-box"> 
-                    <span class="price">$110.00</span>
-                    <div class="item-rating">
-                        <div title="69%" class="rating-result"> <span style="width:69%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-6.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">Denim Ladis Cloth</a>
-                  </div>
-                  <div class="price-box"> 
-                    <span class="price">$205.00</span>
-                    <div class="item-rating">
-                      <div title="55%" class="rating-result"> <span style="width:55%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-              <div class="sale-label"><span>Sale</span></div>
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-7.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">American Ladis Red Cloth</a>
-                  </div>
-                  <div class="price-box"> 
-                    <span class="price">$30.00</span>
-                    <div class="item-rating">
-                      <div title="80%" class="rating-result"> <span style="width:80%"></span> </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-sm-4 col-xs-6 plr-20">
-              <div class="product-item">
-                <div class="product-image"> 
-                <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-8.jpg'; ?>" alt=""> </a>
-                  <div class="product-detail-inner">
-                    <div class="item-overlay">
-                      <ul>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                        <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-item-details">
-                  <div class="item-title"> 
-                    <a href="product-page.html">Beautiful Ladis White Cloth</a>
-                  </div>
-                  <div class="price-box"> 
-                      <span class="price">$28.00</span>
-                      <div class="item-rating">
-                        <div title="70%" class="rating-result"> <span style="width:70%"></span> </div>
+                      ?>
+                      <a href="product-page.html"> <img src="<?php echo $image[0]; ?>" alt=""> </a>
+                        <div class="product-detail-inner">
+                          <div class="item-overlay">
+                            <ul>
+                              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                              <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                              <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
+                      <div class="product-item-details">
+                      <div class="item-title"> <a href="product-page.html"><?php the_title(); ?></a> </div>
+                        <div class="price-box"> 
+                          <span class="price">$<?php echo $product->get_price(); ?></span>
+                          <del class="price old-price"><?php echo $product->get_regular_price() ? $product->get_regular_price() : '' ; ?></del>
+                          <div class="item-rating">
+                            <div title="70%" class="rating-result"> <span style="width:70%"></span> </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
+                  <?php 
+                }
+              }
+            ?>
+         </div>
         </div>
 
     </div>
@@ -364,190 +197,62 @@
         <div class="position-r">
           <div class="row">
             <div class="owl-carousel pro_cat_slider">
+              <?php 
+                $args = array(
+                  'post_type' => 'product',
+                  'tax_query' => array(
+                    'relation' => 'AND',
+                    array(
+                       'taxonomy' => 'product_cat',
+                       'field'    => 'slug',
+                       'terms'    => 'latest_product',
+                    ),
+                  ),
+                  'orderby' => 'title',
+                  'posts_per_page' => -1,
+                );
 
-              <div class="item">
-                <div class="product-item">
-                  <div class="sale-label"><span>Sale</span></div>
-                  <div class="product-image"> <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-9.jpg'; ?>" alt=" "> </a>
-                    <div class="product-detail-inner">
-                      <div class="item-overlay">
-                        <ul>
-                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                          <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                          <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item-details">
-                    <div class="item-title"> <a href="#">American Ladis Cloth</a> </div>
-                    <div class="price-box"> 
-                      <span class="price">$90.00</span> <del class="price old-price">$100.00</del>
-                      <div class="item-rating">
-                       <div title="55%" class="rating-result"> <span style="width:55%"></span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                $latest = new WP_Query( $args );
 
-              <div class="item">
-                <div class="product-item">
-                  <div class="product-image"> 
-                  <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-8.jpg'; ?>" alt=" "> </a>
-                    <div class="product-detail-inner">
-                      <div class="item-overlay">
-                        <ul>
-                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                          <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                          <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item-details">
-                    <div class="item-title"> <a href="#">Ecstasy Ladis Cloth</a> </div>
-                    <div class="price-box"> 
-                      <span class="price">$205.00</span> 
-                      <div class="item-rating">
-                        <div title="90%" class="rating-result"> <span style="width:90%"></span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                while( $latest->have_posts() ) {
+                  $latest->the_post();
+                  $latest_prod = wc_get_product( get_the_ID() );
 
-              <div class="item">
-                <div class="product-item">
-                  <div class="product-image"> 
-                  <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-9.jpg'; ?>" alt=" "> </a>
-                    <div class="product-detail-inner">
-                      <div class="item-overlay">
-                        <ul>
-                          <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                          <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                          <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item-details">
-                    <div class="item-title"> <a href="#">American Ladis Cloths</a> </div>
-                    <div class="price-box"> 
-                      <span class="price">$30.00</span> 
-                      <div class="item-rating">
-                        <div title="65%" class="rating-result"> <span style="width:65%"></span> </div>
-                      </div>  
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  if( $latest_prod->is_in_stock() ) {
 
-                <div class="item">
-                  <div class="product-item">
-                    <div class="product-image"> 
-                    <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().' /images/products/item-10.jpg'; ?>" alt=" "> </a>
-                      <div class="product-detail-inner">
-                        <div class="item-overlay">
-                          <ul>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                            <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="product-item-details">
-                      <div class="item-title"> <a href="#">American Ladis Cloth</a> </div>
-                      <div class="price-box"> 
-                        <span class="price">$40.00</span>
-                        <div class="item-rating">
-                          <div title="70%" class="rating-result"> <span style="width:70%"></span> </div>
-                        </div> 
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                  <div class="item">
-                    <div class="product-item">
-                      <div class="product-image"> 
-                      <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().'/images/products/item-11.jpg'; ?>" alt=" "> </a>
-                        <div class="product-detail-inner">
-                          <div class="item-overlay">
-                            <ul>
-                              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                              <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                              <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                            </ul>
+                    $image = wp_get_attachment_image_src( get_post_thumbnail_id( $latest_prod->ID ), 'single-post-thumbnail' );
+                    ?>
+                    <div class="item">
+                      <div class="product-item">
+                        <div class="product-image"> 
+                        <a href="product-page.html"> <img src="<?php echo $image[0]; ?>" alt=" "> </a>
+                          <div class="product-detail-inner">
+                            <div class="item-overlay">
+                              <ul>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
+                                <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="product-item-details">
-                        <div class="item-title"> <a href="#">Denim Slim Ladis Cloth</a> </div>
-                        <div class="price-box"> 
-                          <span class="price">$46.00</span>
-                          <div class="item-rating">
-                            <div title="85%" class="rating-result"> <span style="width:85%"></span> </div>
-                          </div> 
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="item">
-                    <div class="product-item">
-                      <div class="product-image"> 
-                      <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().'/images/products/item-5.jpg'; ?>" alt=" "> </a>
-                        <div class="product-detail-inner">
-                          <div class="item-overlay">
-                            <ul>
-                              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                              <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                              <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="product-item-details">
-                        <div class="item-title"> <a href="#">American Ladis Cloth</a> </div>
-                        <div class="price-box"> 
-                          <span class="price">$80.00</span> 
-                          <div class="item-rating">
-                            <div title="60%" class="rating-result"> <span style="width:60%"></span> </div>
-                          </div>
-                       </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="item">
-                    <div class="product-item">
-                      <div class="product-image"> 
-                      <a href="product-page.html"> <img src="<?php echo get_template_directory_uri().'/images/products/item-3.jpg'; ?>" alt=" "> </a>
-                        <div class="product-detail-inner">
-                          <div class="item-overlay">
-                            <ul>
-                              <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                              <li><a href="#" title="Wishlist"><i class="fa fa-heart-o"></i></a></li>
-                              <li><a href="#" title="Compare"><i class="fa fa-random"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="product-item-details">
-                        <div class="item-title"> <a href="#">American Ladis Cloth</a> </div>
-                        <div class="price-box"> 
-                          <span class="price">$80.00</span>
-                          <div class="item-rating">
-                            <div title="72%" class="rating-result"> <span style="width:72%"></span> </div>
+                        <div class="product-item-details">
+                          <div class="item-title"> <a href="#"><?php the_title(); ?></a> </div>
+                          <div class="price-box"> 
+                            <span class="price">$ <?php echo $latest_prod->get_price(); ?></span> 
+                            <div class="item-rating">
+                              <div title="90%" class="rating-result"> <span style="width:90%"></span> </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-              </div>
-              </div>
+                    <?php
+                  }
+                }
+              ?>
+             </div>
+           </div>
 
             </div>
           </div>
@@ -606,88 +311,41 @@
           </div>
           <div class="row blog-mobile-m">
             <div id="news" class="owl-carousel">
-              <div class="item">
-                <div class="blog-item">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="blog-media">                         
-                        <a href="single-blog.html" title="" class="read">
-                        <img src="<?php echo get_template_directory_uri().'/images/blog/blog-1.jpg'; ?>" alt=" "> 
-                        </a> 
+              <?php 
+              while( have_posts() ) {
+                the_post();
+                ?>
+                <div class="item">
+                  <div class="blog-item">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="blog-media">                         
+                          <a href="single-blog.html" title="" class="read">
+                          <img src="<?php echo get_template_directory_uri().'/images/blog/blog-1.jpg'; ?>" alt=" "> 
+                          </a> 
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col-md-6">
-                      <div class="blog-detail">
-                        <div class="date">27 Jan 2018</div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit amet</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, nulla accusantium ut blanditiis quas, repellendus voluptates rem provident qui dolorem minus id vero repellat.</p>
-                        <hr>
-                        <div class="post-info">
-                          <ul>
-                            <li><span>By</span><a href="#"> Xpent</a></li>
-                            <li><a href="#">(5) comments</a></li>
-                          </ul>
+                      <div class="col-md-6">
+                        <div class="blog-detail">
+                          <div class="date">27 Jan 2018</div>
+                          <h3><a href="single-blog.html"><?php the_title(); ?></a></h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, nulla accusantium ut blanditiis quas, repellendus voluptates rem provident qui dolorem minus id vero repellat.</p>
+                          <hr>
+                          <div class="post-info">
+                            <ul>
+                              <li><span>By</span><a href="#"> Xpent</a></li>
+                              <li><a href="#">(5) comments</a></li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="item">
-                <div class="blog-item">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="blog-media">
-                        <a href="single-blog.html" title="" class="read">
-                        <img src="<?php echo get_template_directory_uri().'/images/blog/blog-2.jpg'; ?>" alt=" "> 
-                        </a> 
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="blog-detail">
-                        <div class="date">27 Jan 2018</div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit amet</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus eum, similique, quia, saepe ea distinctio soluta nobis architecto accusamus ullam accusantium.</p>
-                        <hr>
-                        <div class="post-info">
-                          <ul>
-                            <li><span>By</span><a href="#"> Xpent</a></li>
-                            <li><a href="#">(5) comments</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="blog-item">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="blog-media"> 
-                        <a href="single-blog.html" title="" class="read">
-                        <img src="<?php echo get_template_directory_uri().'/images/blog/blog-3.jpg'; ?>" alt=" "> 
-                        </a> 
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="blog-detail">
-                        <div class="date">27 Jan 2018</div>
-                        <h3><a href="single-blog.html">Lorem ipsum dolor sit amet</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet quasi quas iusto quaerat. Architecto, velit nostrum laborum aliquid hic impedit quis porro, sunt id dolorem error.</p>
-                        <hr>
-                        <div class="post-info">
-                          <ul>
-                            <li><span>By</span><a href="#"> Xpent</a></li>
-                            <li><a href="#">(5) comments</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <?php
+              }
+              ?>
             </div>
           </div>
         </div>
