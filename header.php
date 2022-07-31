@@ -172,7 +172,11 @@
   <div class="header-bottom">
     <div class="container position-r">
       <div class="row m-0">
-        <div class="col-md-3 position-i p-0">
+        <?php 
+          if ( ! is_page( 'opinion' ) ) {
+
+            ?>
+            <div class="col-md-3 position-i p-0">
             <div class="sidebar-menu-dropdown home ptb-20">
               <a class="btn-sidebar-menu-dropdown"><span></span> Categories</a>
               <div id="cat" class="cat-dropdown">
@@ -271,6 +275,9 @@
               </div>
             </div>
         </div>
+            <?php
+          }
+        ?>
 
         <div class="col-md-9 p-0">
           <div class="nav_sec position-r">

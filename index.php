@@ -312,8 +312,13 @@
           <div class="row blog-mobile-m">
             <div id="news" class="owl-carousel">
               <?php 
-              while( have_posts() ) {
-                the_post();
+              $blogs = new WP_Query(array(
+                'post_type' => 'post',
+                'posts_per_page' => -1,
+                'orderby' => 'title',
+              ));
+              while( $blogs->have_posts() ) {
+                $blogs->the_post();
                 ?>
                 <div class="item">
                   <div class="blog-item">
@@ -321,7 +326,10 @@
                       <div class="col-md-6">
                         <div class="blog-media">                         
                           <a href="single-blog.html" title="" class="read">
-                          <img src="<?php echo get_template_directory_uri().'/images/blog/blog-1.jpg'; ?>" alt=" "> 
+                            <?php 
+                             $my_image = get_post_meta(get_the_ID(), 'custom_image_data', true);
+                            ?>
+                          <img src="<?php echo $my_image['src'];?>" alt=" "> 
                           </a> 
                         </div>
                       </div>
@@ -330,12 +338,12 @@
                         <div class="blog-detail">
                           <div class="date">27 Jan 2018</div>
                           <h3><a href="single-blog.html"><?php the_title(); ?></a></h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, nulla accusantium ut blanditiis quas, repellendus voluptates rem provident qui dolorem minus id vero repellat.</p>
+                          <p><?php the_content(); ?></p>
                           <hr>
                           <div class="post-info">
                             <ul>
-                              <li><span>By</span><a href="#"> Xpent</a></li>
-                              <li><a href="#">(5) comments</a></li>
+                              <li><span>By</span><a href="#"> <?php echo get_the_author(); ?></a></li>
+                              <li><a href="#"><?php echo get_comments_number(); ?> comments</a></li>
                             </ul>
                           </div>
                         </div>
